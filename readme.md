@@ -1,4 +1,4 @@
-# 📝 Documentation de log 
+# 📝 Documentation de API Login, SignUp, Forgot Password
 
 Cette API gère l'authentification des utilisateurs (inscription, connexion, vérification, changepassword) et la récupération des informations utilisateur...
 
