@@ -22,8 +22,9 @@ export const UserRoutePut = (router: Router, service: UserPutService) => {
             if (!reponse){
                 res.status(StatusCodes.BAD_REQUEST).send({
                     "status": ReasonPhrases.BAD_REQUEST,
-                    "message": "error on update password"
+                    "message": "incorrect password"
                 })
+                return;
             }
 
             res.status(StatusCodes.OK).send({
