@@ -3,9 +3,9 @@ import express, { Application, urlencoded } from 'express';
 import { createServer } from 'node:http';
 import cookieParser from 'cookie-parser';
 
-import { OTPDataAcces, syncMongoDB, userGetDataAcces, userPostDataAcces } from './data access';
-import { OTPRoutes, UserRouteGet, UserRoutePost } from './routes';
-import { OTPService, userGetService, userPostService } from './services';
+import { OTPDataAcces, syncMongoDB, userGetDataAcces, userPostDataAcces, userPutDataAccess } from './data access';
+import { OTPRoutes, UserRouteGet, UserRoutePost, UserRoutePut } from './routes';
+import { OTPService, userGetService, userPostService, UserPutService } from './services';
 
 dotenv.config();
 const app: Application = express();
@@ -23,9 +23,10 @@ app.use('/',router);
 // Router User
 UserRouteGet(router,new userGetService(new userGetDataAcces))
 UserRoutePost(router,new userPostService(new userPostDataAcces,new userGetDataAcces))
+UserRoutePut(router,new UserPutService(new userPutDataAccess,new userGetDataAcces, new OTPDataAcces))
 
 // OTP
-OTPRoutes(router,new OTPService(new OTPDataAcces))
+OTPRoutes(router,new OTPService(new OTPDataAcces),new UserPutService(new userPutDataAccess, new userGetDataAcces, new OTPDataAcces))
 
 // Init Server
 server.listen(PORT, () => {

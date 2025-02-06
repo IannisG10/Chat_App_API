@@ -13,7 +13,7 @@ export class OTPService {
 
     public async sendOTP(email: string): Promise<boolean>{
         try {
-            await this.OTPDataAccess.getAndDeleteOTPByEmail(email)
+            await this.OTPDataAccess.deleteOTPByEmail(email)
 
             const otp = generateOTP();
             const newOTP = new OTP({ email, otp })
@@ -31,14 +31,15 @@ export class OTPService {
         }
     }
 
-    public async verifyOTP(otp: Omit<IOtp,"id">): Promise<boolean>{
+    public async verifyOTP(otp: Omit<IOtp,"id" | "verified">): Promise<boolean>{
         try {
-            const existingOTP = await this.OTPDataAccess.getAndDeleteOTPByOtp(otp)
+            const existingOTP = await this.OTPDataAccess.getOTPByOtp(otp)
     
             if (!existingOTP) {
                 return false;
             }
     
+            await this.OTPDataAccess.setOtpToVerified(otp);
             return true;
         } catch (error) {
             throw error

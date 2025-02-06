@@ -10,4 +10,5 @@ export class userGetDataAcces {
             throw error
         }
     }
+    
 }

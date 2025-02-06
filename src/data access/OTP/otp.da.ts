@@ -22,6 +22,15 @@ export class OTPDataAcces {
         }
     }
 
+    public async getOTPByOtp(Otp: Omit<IOtp,"id" | "verified">): Promise<IOtp | null>{
+        try {
+            const otp: IOtp | null = await OTP.findOne(Otp).exec();
+            return otp;
+        } catch (error) {
+            throw error
+        }
+    }
+
     public async getAndDeleteOTPByOtp(Otp: Omit<IOtp,"id">){
         try {
             const existingOTP = await OTP.findOneAndDelete(Otp).exec();
@@ -31,9 +40,17 @@ export class OTPDataAcces {
         }
     }
 
-    public async getAndDeleteOTPByEmail(email: string){
+    public async deleteOTPByEmail(email: string){
         try {
             await OTP.deleteOne({},{ email: email }).exec();
+        } catch (error) {
+            throw error
+        }
+    }
+
+    public async setOtpToVerified(Otp: Omit<IOtp,"id" | "verified">){
+        try {
+            await OTP.updateOne(Otp, { $set: { verified: true } })
         } catch (error) {
             throw error
         }

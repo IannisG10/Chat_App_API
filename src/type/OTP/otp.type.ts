@@ -4,12 +4,14 @@ interface Otp extends Document {
     id: string,
     email: string;
     otp: string;
+    verified: boolean
 }
 
 export interface IOtp {
     id: string,
     email: string,
-    otp: string
+    otp: string,
+    verified: boolean
 }
 
 const otpSchema = new Schema<Otp>({
@@ -26,6 +28,11 @@ const otpSchema = new Schema<Otp>({
     otp: {
         type: String,
         required: true
+    },
+    verified: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 })
 export const OTP = model<Otp>('otps',otpSchema);

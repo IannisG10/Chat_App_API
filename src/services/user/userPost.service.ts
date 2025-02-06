@@ -3,6 +3,7 @@ import { userGetDataAcces, userPostDataAcces } from '../../data access';
 import { IUser, logUserResponse } from '../../type';
 import  bcrypt  from 'bcrypt';
 import jwt, { JwtPayload } from 'jsonwebtoken'
+import { comparePassword } from '../../utils';
 
 export class userPostService {
 
@@ -49,11 +50,12 @@ export class userPostService {
                return null
             };
 
+
             // Vérifion le mot de passe
-            const isPasswordMatched = await bcrypt.compare(password,isUserExist.password);
-            if (!isPasswordMatched) {
+            const isPasswordMatched: boolean = await comparePassword(password,isUserExist.password)
+            if (!isPasswordMatched){
                 return null;
-            };
+            }
 
             if (!process.env.JWT_KEY) {
                 console.log(" verifie the JWT_KEY in .env");
