@@ -1,6 +1,6 @@
-# 📝 Documentation de l'API - ChatApp
+# 📝 Documentation de log 
 
-Cette API gère l'authentification des utilisateurs (inscription, connexion, vérification) et la récupération des informations utilisateur...
+Cette API gère l'authentification des utilisateurs (inscription, connexion, vérification, changepassword) et la récupération des informations utilisateur...
 
 # 📌 .env exemple
 
