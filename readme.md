@@ -141,8 +141,55 @@ Remplace `<PORT>` par le port sur lequel dans le `.env`.
         }
 
     ```
+- ## 5. **Envoi d'un OTP** - `/sendotp`
 
+    - **Méthode** : `POST`
+    - **Description** : Envoie un **OTP (One-Time Password)** à l'email fourni en paramètre.
+    - **Paramètres de requête** :
+      - `email` (query param) : Adresse email de l'utilisateur
+    - **Exemple de requête** :
+    ```url
+        /sendotp?email=john.doe@example.com
+    ```
+    - **Réponse réussie** (`200 OK`):
+    ```json
+        {
+            "status": "OK",
+            "message": "OTP sent successfully"
+        }
+    ```
+    - **Réponse en cas d'erreur** (`400 BAD REQUEST`):
+    ```json
+        {
+            "status": "BAD REQUEST",
+            "message": "try query key=email and value=value of email"
+        }
+    ``` 
+- ## 6.**Vérification d'un OTP** - `/verifyotp`
 
+    - **Méthode** : `POST`
+    - **Description** : Vérifie si l'**OTP** fourni est valide pour un email donné.
+    - **Paramètres de requête** :
+      - **email** (`query param`) : Adresse email de l'utilisateur
+      - **otp** (`query param`) : Code OTP reçu
+    - **Exemple de requête** :
+    ```url
+        /verifyotp?email=john.doe@example.com&otp=123456
+    ``` 
+    - **Réponse réussie (`200 OK`)**:
+    ```json
+        {
+            "status": "OK",
+            "message": "OTP verification successful"
+        }
+    ``` 
+    - **Réponse en cas d'erreur** (`400 BAD REQUEST`):
+    ```json
+        {
+            "status": "BAD REQUEST",
+            "message": "Invalid OTP"
+        }
+    ```
 # 🛠️ Utilisation
 
 

@@ -19,5 +19,4 @@ export const UserRouteGet = (router: Router, service: userGetService) => {
             throw error
         }
     })
-
 }

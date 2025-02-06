@@ -1,8 +1,10 @@
-import { UserRouteGet } from "./user/userGet.route";
-import { UserRoutePost } from "./user/userPost.route";
+import { UserRouteGet } from "./user/userGet.routes";
+import { UserRoutePost } from "./user/userPost.routes";
+import { OTPRoutes } from "./otp/otp.routes";
 
 
 export {
     UserRouteGet,
-    UserRoutePost
+    UserRoutePost,
+    OTPRoutes
 }
