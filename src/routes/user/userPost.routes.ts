@@ -91,7 +91,7 @@ export const UserRoutePost = (router: Router, service: userPostService) => {
             if (!isVerified) {
                 res.status(StatusCodes.NOT_FOUND).send({
                     "status": ReasonPhrases.NOT_FOUND,
-                    "message": "log first"
+                    "message": "log or signup first"
                 })
                 return;
             }

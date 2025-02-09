@@ -97,7 +97,14 @@ Remplace `<PORT>` par le port sur lequel dans le `.env`.
             }
 
         ```
+        or
+        ```json
+            {
+                "status": "BAD REQUEST",
+                "message": "all property is required"
+            }
 
+        ```
     
 - ## 3. **Vérification d'authentification**  - `/auth`
     - **Méthode** : `POST`
@@ -117,7 +124,7 @@ Remplace `<PORT>` par le port sur lequel dans le `.env`.
         ```json
             {
                 "status": "NOT FOUND",
-                "message": "log first"
+                "message": "log or signup first"
             }
 
         ```
@@ -174,7 +181,7 @@ Remplace `<PORT>` par le port sur lequel dans le `.env`.
             "message": "try query key=email and value=value of email"
         }
     ``` 
-- ## 6.**Vérification d'un OTP** - `/verifyotp`
+- ## 6.**Vérification d'un OTP** - `/verify-otp`
 
     - **Méthode** : `POST`
     - **Description** : Vérifie si l'**OTP** fourni est valide pour un email donné.
@@ -199,6 +206,93 @@ Remplace `<PORT>` par le port sur lequel dans le `.env`.
             "message": "Invalid OTP"
         }
     ```
+
+- ## 7. **Changer le mot passe avec un OTP vérifier** - `/verify-otp`
+
+    - **Méthode**: `POST`
+    - **Déscription**: Changer le mot de passe d'un utilisateur à l'aide d'un `OTP` qui est déjà verifier.
+    - **Paramètres de requête** :
+      - **email** (`query param`) : Adresse email de l'utilisateur
+      - **otp** (`query param`) : Code OTP déjà vérifier
+      - **Corps de la requête** (`body`):
+     
+        ```json
+            {
+                "newPassword": "votre nouveau mot de passe"
+            }
+        ```
+
+    - **Exemple de requête** :
+        - **url**: 
+    ```url
+        /verify-otp?email=john.doe@example.com&otp=345987
+    ``` 
+    avec `body` ou corp:
+    ```json
+        {
+            "newPassword": "Ajf&#frpPiç"
+        }
+    ```
+    
+    - **Réponse réussie (`200 OK`)**:
+    ```json
+        {
+            "status": "ok",
+            "message": "password change with success"
+        }
+    ``` 
+    - **Réponse en cas d'erreur** (`400 BAD REQUEST`):
+    ```json
+        {
+            "status": "bad request",
+            "message": "Invalid OTP"
+        }
+    ```
+    or 
+    ```json
+        {
+            "status": "internal server error", 
+            "message": "contact the admnistrator" 
+        }
+    ```
+
+- ## 8. **Changer le mot passe avec l'encient mot de passe** - `/verify-otp`
+
+    - **Méthode**: `PUT`
+    - **Déscription**: Changer le mot de passe d'un utilisateur à l'aide de l'enciens mot de passe.
+    - **Paramètres de requête** :
+      - **email** (`query param`) : Adresse email de l'utilisateur
+      - **Corps de la requête** (`body`):
+     
+        ```json
+            {
+                "oldPassword": "azerty", 
+                "newPassword": "Pmrf&#f!"
+            }
+        ```
+    
+    - **Réponse réussie (`200 OK`)**:
+    ```json
+        {
+            "status": "ok",
+            "message": "password change with success"
+        }
+    ``` 
+    - **Réponse en cas d'erreur** (`400 BAD REQUEST`):
+    ```json
+        {
+            "status": "bad request",
+            "message": "try body 'oldPassword','newPassword' and query 'email' "
+        }
+    ```
+    or 
+    ```json
+        {
+            "status": "internal server error", 
+            "message": "incorrect password"
+        }
+    ```
+
 # 🛠️ Utilisation
 
 
