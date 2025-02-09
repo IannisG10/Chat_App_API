@@ -33,7 +33,5 @@ export const sendEmail = async (destEmail: string,otp: number | string): Promise
         console.error(error)
         return null;
     }
-    
-
     return data;
 }

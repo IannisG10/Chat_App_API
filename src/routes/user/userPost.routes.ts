@@ -16,20 +16,27 @@ export const UserRoutePost = (router: Router, service: userPostService) => {
                 })
                 return;
             }
-            const  response: string = await service.SignUp({ firstname, lastname, email, password })
-            if (response) {
-                res.status(StatusCodes.OK).send({
-                    "status": ReasonPhrases.OK,
-                    "message": {
-                        "id": response
-                    }
-                })    
-            } else {
+            const  response: logUserResponse | null = await service.SignUp({ firstname, lastname, email, password })
+            if (!response) {
                 res.status(StatusCodes.BAD_REQUEST).send({
                     "status": ReasonPhrases.BAD_REQUEST,
                     "message": "email already exist"
                 })
+                return;
             }
+            res.cookie("token_chat",response.token,{
+                httpOnly: true,
+                sameSite: true,
+                maxAge: 24 * (60 * (60 * 1000)) // 24h
+            })
+
+            res.status(StatusCodes.OK).send({
+                "status": ReasonPhrases.OK,
+                "message": {
+                    "id": response.id
+                }
+            })    
+
         } catch (error) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR)
             throw error

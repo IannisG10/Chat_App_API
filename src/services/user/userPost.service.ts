@@ -3,7 +3,7 @@ import { userGetDataAcces, userPostDataAcces } from '../../data access';
 import { IUser, logUserResponse } from '../../type';
 import  bcrypt  from 'bcrypt';
 import jwt, { JwtPayload } from 'jsonwebtoken'
-import { comparePassword } from '../../utils';
+import { comparePassword, generateToken } from '../../utils';
 
 export class userPostService {
 
@@ -12,14 +12,14 @@ export class userPostService {
         private userGetDataAcces: userGetDataAcces
     ){}
 
-    public async SignUp(newUserWithoutId: Omit<IUser, "id">): Promise<string> {
+    public async SignUp(newUserWithoutId: Omit<IUser, "id">): Promise<logUserResponse | null> {
         try {
             const id: string =  uuidv4()
 
             // vérifier si l'email est déjà utiliser
             const IsUserAvailable: IUser | null = await this.userGetDataAcces.getUserByEmail(newUserWithoutId.email)
             if (IsUserAvailable) {
-                return '';
+                return null;
             }
 
             // hasher le mot de passe
@@ -35,7 +35,19 @@ export class userPostService {
                 })
             })
 
-            return id;
+            if (!process.env.JWT_KEY) {
+                console.log(" verifie the JWT_KEY in .env");
+                return null;
+            };
+
+            // Génerer token
+            const token = generateToken({
+                id: id,
+                email: newUserWithoutId.email,
+                password: newUserWithoutId.password
+            },process.env.JWT_KEY)
+
+            return Object.assign({},{ id: id, token: token })
         } catch (error) {
             throw error
         }
@@ -63,14 +75,12 @@ export class userPostService {
             };
 
             // génerer un token
-            const token = jwt.sign(
-                { id: isUserExist.id, email: isUserExist.email, password: isUserExist.password },
-                process.env.JWT_KEY,
-                {
-                    expiresIn: (24 * (60 *(60 * 1000))) + 15
-                }
-            )
-
+            const token = generateToken({ 
+                id: isUserExist.id, 
+                email: isUserExist.email, 
+                password: isUserExist.password 
+            },process.env.JWT_KEY)
+            
             return Object.assign({},{ id: isUserExist.id, token: token })
         } catch (error) {
             console.log(' Login error');
