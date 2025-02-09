@@ -8,6 +8,7 @@ Cette API gère l'authentification des utilisateurs (inscription, connexion, vé
     PORT=5500
     MONGODB_URL=mongodb://127.0.0.1:27017/chatapp
     JWT_KEY=SECRET_JWT_KEY
+    DOMAIN_NAME=http://localhost:5117
 ```
 
 # 📌 Base URL
