@@ -1,6 +1,6 @@
-# 📝 Documentation de API Login, SignUp, Forgot Password
+# 📝 Documentation de API Login, SignUp, Forgot Password, Authentification
 
-Cette API gère l'authentification des utilisateurs (inscription, connexion, vérification, changepassword) et la récupération des informations utilisateur...
+Cette API gère l'authentification des utilisateurs (inscription, connexion, vérification, changepassword) et la récupération des informations utilisateur...    
 
 # 📌 .env exemple
 
