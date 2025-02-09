@@ -10,6 +10,9 @@ Cette API gère l'authentification des utilisateurs (inscription, connexion, vé
     JWT_KEY=SECRET_JWT_KEY
     DOMAIN_NAME=http://localhost:5117
 ```
+# 📌 Visionnage
+
+[Link Text](#inscription).
 
 # 📌 Base URL
 
@@ -313,5 +316,7 @@ Remplace `<PORT>` par le port sur lequel dans le `.env`.
     npm run build
 ```
 
-> Créer le fichier .env en premier
+>[warning!] Créer le fichier .env en premier
+
+
 
