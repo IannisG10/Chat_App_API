@@ -23,7 +23,7 @@ Remplace `<PORT>` par le port sur lequel dans le `.env`.
 
 - ## 1.  **Inscription - `/signup`**
     - **Méthode** : `POST`
-    - **Description** : Crée un compte utilisateur.
+    - **Description** : Crée un compte utilisateur et un token de session
     - **Corps de la requête** (`body`):
   
         ```json
@@ -51,6 +51,14 @@ Remplace `<PORT>` par le port sur lequel dans le `.env`.
         {
             "status": "BAD REQUEST",
             "message": "email already exist"
+        }
+
+    ```
+    ou
+    ```json
+        {
+            "status": "BAD REQUEST",
+            "message": "all propriety is required"
         }
 
     ```

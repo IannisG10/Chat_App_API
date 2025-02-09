@@ -12,7 +12,7 @@ export const UserRoutePost = (router: Router, service: userPostService) => {
             if (!firstname || !lastname || !email || !password){
                 res.status(StatusCodes.BAD_REQUEST).send({
                     "status": ReasonPhrases.BAD_REQUEST,
-                    "message": "all propriety is required"
+                    "message": "all property is required"
                 })
                 return;
             }
@@ -47,6 +47,13 @@ export const UserRoutePost = (router: Router, service: userPostService) => {
         const { email, password } = req.body
 
         try {
+            if (!email || !password){
+                res.status(StatusCodes.BAD_REQUEST).send({
+                    "status": ReasonPhrases.BAD_REQUEST,
+                    "message": "all property is required"
+                })
+                return;
+            }
             const response: logUserResponse | null = await service.LogIn(email,password);
             if (!response) {
                 res.status(StatusCodes.BAD_REQUEST).send({
