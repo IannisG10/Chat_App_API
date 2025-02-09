@@ -12,7 +12,15 @@ Cette API gère l'authentification des utilisateurs (inscription, connexion, vé
 ```
 # 📌 Visionnage
 
-[Link Text](#inscription).
+- 1.[Inscription](#1--inscription---signup).
+- 2.[Connection](#2-connexion---login).
+- 3.[Authentification](#3-vérification-dauthentification----auth).
+- 4.[Obtenir l'information d'un utilisateur](#4-récupération-des-informations-utilisateur---useremail).
+- 5.[Envoyer OTP](#5-envoi-dun-otp---sendotp).
+- 6.[Vérifier OTP](#6vérification-dun-otp---verify-otp).
+- 7.[Changer mot de passe avec un OTP vérifier](#7-changer-le-mot-passe-avec-un-otp-vérifier---verify-otp). 
+- 2.[Changer mot de passe avec l'encient mot de passe](#8-changer-le-mot-passe-avec-lencient-mot-de-passe---verify-otp).
+
 
 # 📌 Base URL
 
