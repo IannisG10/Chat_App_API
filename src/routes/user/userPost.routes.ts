@@ -14,6 +14,7 @@ export const UserRoutePost = (router: Router, service: userPostService) => {
                     "status": ReasonPhrases.BAD_REQUEST,
                     "message": "all propriety is required"
                 })
+                return;
             }
             const  response: string = await service.SignUp({ firstname, lastname, email, password })
             if (response) {
