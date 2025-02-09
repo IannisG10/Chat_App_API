@@ -16,12 +16,12 @@ const MONGODB_URL = process.env.MONGODB_URL || 'mongodb://127.0.0.1:27017/chatap
 const router = express.Router()
 
 // Middleware
-app.use(cors({
-    origin: process.env.DOMAIN_ORIGIN,
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: [ 'Content-type','Authorization' ]  
-}));
+// app.use(cors({
+//     origin: process.env.DOMAIN_ORIGIN,
+//     credentials: true,
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     allowedHeaders: [ 'Content-type','Authorization' ]  
+// }));
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
 app.use(cookieParser());

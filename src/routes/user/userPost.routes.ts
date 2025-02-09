@@ -9,6 +9,12 @@ export const UserRoutePost = (router: Router, service: userPostService) => {
         const { firstname, lastname, email, password } = req.body
 
         try {
+            if (!firstname || !lastname || !email || !password){
+                res.status(StatusCodes.BAD_REQUEST).send({
+                    "status": ReasonPhrases.BAD_REQUEST,
+                    "message": "all propriety is required"
+                })
+            }
             const  response: string = await service.SignUp({ firstname, lastname, email, password })
             if (response) {
                 res.status(StatusCodes.OK).send({
