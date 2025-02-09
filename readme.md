@@ -295,4 +295,23 @@ Remplace `<PORT>` par le port sur lequel dans le `.env`.
 
 # 🛠️ Utilisation
 
+- **Clonez le dépôt**
+
+```shell
+    git clone https://github.com/TsitouhRanjafy/ChatApp_Web.git
+```
+
+- **Entrer dans le dépôt et installé les dependances**
+```shell
+    cd <nom_dossier> 
+    npm install
+```
+
+- **Lancer le serveur**
+  
+```shell
+    npm run build
+```
+
+> Créer le fichier .env en premier
 
