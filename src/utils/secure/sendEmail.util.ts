@@ -5,9 +5,9 @@ const resend = new Resend('re_21Xnw1Xn_9DVoC4tSauAemMcSF9oeRXhZ')
 
 export const sendEmail = async (destEmail: string,otp: number | string): Promise<null | object> => {
     const { data, error } = await resend.emails.send({
-        from: 'Test Resend <onboarding@resend.dev>',
+        from: 'Notre equipe <onboarding@resend.dev>',
         to: [destEmail],
-        subject: 'hello',
+        subject: 'Changement de mots de passe',
         html: `
             <body style="font-family: sans-serif;">
                 <div style="width: 100%; height: 100%; border:red solid 1px; display: flex; justify-content: center;" >

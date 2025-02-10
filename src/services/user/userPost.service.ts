@@ -3,7 +3,7 @@ import { userGetDataAcces, userPostDataAcces } from '../../data access';
 import { IUser, logUserResponse } from '../../type';
 import  bcrypt  from 'bcrypt';
 import jwt, { JwtPayload } from 'jsonwebtoken'
-import { comparePassword, generateToken } from '../../utils';
+import { comparePassword, generateToken, hashPassword} from '../../utils';
 
 export class userPostService {
 
@@ -23,17 +23,15 @@ export class userPostService {
             }
 
             // hasher le mot de passe
-            bcrypt.genSalt(10,(err,salt) => {
-                bcrypt.hash(newUserWithoutId.password,salt, async (err,hash) => {
-                    await this.userPostDataAcces.signup({
-                        id: id,
-                        firstname: newUserWithoutId.firstname,
-                        lastname: newUserWithoutId.lastname,
-                        email: newUserWithoutId.email,
-                        password: hash
-                    })
-                })
+            const passworHashed: string = await hashPassword(newUserWithoutId.password)
+            await this.userPostDataAcces.signup({
+                id: id,
+                firstname: newUserWithoutId.firstname,
+                lastname: newUserWithoutId.lastname,
+                email: newUserWithoutId.email,
+                password: passworHashed
             })
+    
 
             if (!process.env.JWT_KEY) {
                 console.log(" verifie the JWT_KEY in .env");

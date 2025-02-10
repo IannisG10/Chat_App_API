@@ -1,6 +1,6 @@
 import { OTPDataAcces, userGetDataAcces, userPutDataAccess } from "../../data access";
 import { IOtp, IUser } from "../../type";
-import { comparePassword } from "../../utils";
+import { comparePassword, hashPassword } from "../../utils";
 import  bcrypt from 'bcrypt' 
 
 export class UserPutService {
@@ -14,7 +14,6 @@ export class UserPutService {
     public async updatePasswordByEmail(email: string, oldPassword: string, newPassword: string): Promise<boolean>{
         try {
             const isUserExist: IUser | null = await this.userGetDataAccess.getUserByEmail(email)
-
             if (!isUserExist){
                 return false;
             }
@@ -25,18 +24,12 @@ export class UserPutService {
             }
 
             // hasher le mot de passe
-            bcrypt.genSalt(10,(err,salt) => {
-                bcrypt.hash(newPassword,salt, async (err,hash) => {
-                    if (err){
-                        console.log("hashage error");
-                        return;
-                    }
-                    const response = await this.userPutDataAccess.updatePassword(email,hash)
-                    if (!response){
-                        return;
-                    }
-                })
-            })            
+            const passworHashed: string = await hashPassword(newPassword)
+
+            const response = await this.userPutDataAccess.updatePassword(email,passworHashed)
+            if (!response){
+                return false;
+            }
 
             return true;
         } catch (error) {
@@ -50,24 +43,18 @@ export class UserPutService {
 
             if (!isUserExist) return false
 
+            // Vérifiaction OTP
             const OTP: IOtp | null = await this.otpDataAccess.getOTPByOtp(otp)
-
             if (!OTP) return false;
             if (!OTP.verified) return false;
 
             // hasher le mot de passe
-            bcrypt.genSalt(10,(err,salt) => {
-                bcrypt.hash(newPassword,salt, async (err,hash) => {
-                    if (err){
-                        console.log("hashage error");
-                        return;
-                    }
-                    const response = await this.userPutDataAccess.updatePassword(otp.email,hash)
-                    if (!response){
-                        return;
-                    }
-                })
-            })    
+            const passworHashed = await hashPassword(newPassword);
+
+            const response = await this.userPutDataAccess.updatePassword(otp.email,passworHashed)
+            if (!response){
+                return false;
+            }    
 
             await this.otpDataAccess.deleteOTPByEmail(otp.email);
             return true;

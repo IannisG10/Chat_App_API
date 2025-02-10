@@ -19,7 +19,7 @@ Cette API gère l'authentification des utilisateurs (inscription, connexion, vé
 - 5.[Envoyer OTP](#5-envoi-dun-otp---sendotp).
 - 6.[Vérifier OTP](#6vérification-dun-otp---verify-otp).
 - 7.[Changer mot de passe avec un OTP vérifier](#7-changer-le-mot-passe-avec-un-otp-vérifier---verify-otp). 
-- 2.[Changer mot de passe avec l'encient mot de passe](#8-changer-le-mot-passe-avec-lencient-mot-de-passe---verify-otp).
+- 8.[Changer mot de passe avec l'encient mot de passe](#8-changer-le-mot-passe-avec-lencient-mot-de-passe---verify-otp).
 
 
 # 📌 Base URL
