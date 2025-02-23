@@ -267,7 +267,7 @@ Remplace `<PORT>` par le port sur lequel dans le `.env`.
         }
     ```
 
-- ## 8. **Changer le mot passe avec l'encient mot de passe** - `/verify-otp`
+- ## 8. **Changer le mot passe avec l'encient mot de passe** - `/update/password`
 
     - **Méthode**: `PUT`
     - **Déscription**: Changer le mot de passe d'un utilisateur à l'aide de l'enciens mot de passe.
