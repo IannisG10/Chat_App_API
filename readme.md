@@ -201,7 +201,7 @@ Remplace `<PORT>` par le port sur lequel dans le `.env`.
       - **otp** (`query param`) : Code OTP reçu
     - **Exemple de requête** :
     ```url
-        /verifyotp?email=john.doe@example.com&otp=123456
+        /verify-otp?email=john.doe@example.com&otp=123456
     ``` 
     - **Réponse réussie (`200 OK`)**:
     ```json
