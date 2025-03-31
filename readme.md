@@ -314,7 +314,8 @@ Remplace `<PORT>` par le port sur lequel dans le `.env`.
 
 - **Entrer dans le dépôt et installé les dependances**
 ```shell
-    cd <nom_dossier> 
+    cd <nom_dossier>
+    git checkout -b api_login origin/api_login
     npm install
 ```
 
