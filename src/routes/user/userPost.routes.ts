@@ -6,17 +6,17 @@ import { logUserResponse } from "../../type"
 export const UserRoutePost = (router: Router, service: userPostService) => {
 
     router.post('/signup', async (req: Request, res: Response) => {
-        const { firstname, lastname, email, password } = req.body
+        const {  username, email, password } = req.body
 
         try {
-            if (!firstname || !lastname || !email || !password){
+            if ( !username || !email || !password){
                 res.status(StatusCodes.BAD_REQUEST).send({
                     "status": ReasonPhrases.BAD_REQUEST,
                     "message": "all property is required"
                 })
                 return;
             }
-            const  response: logUserResponse | null = await service.SignUp({ firstname, lastname, email, password })
+            const  response: logUserResponse | null = await service.SignUp({ username, email, password })
             if (!response) {
                 res.status(StatusCodes.BAD_REQUEST).send({
                     "status": ReasonPhrases.BAD_REQUEST,
