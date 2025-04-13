@@ -11,7 +11,7 @@ import cors from 'cors'
 dotenv.config();
 const app: Application = express();
 const server = createServer(app);
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT ;
 const MONGODB_URL = process.env.MONGODB_URL || 'mongodb://127.0.0.1:27017/chatapp'
 const router = express.Router()
 
