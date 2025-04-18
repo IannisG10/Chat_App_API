@@ -26,8 +26,7 @@ export class userPostService {
             const passworHashed: string = await hashPassword(newUserWithoutId.password)
             await this.userPostDataAcces.signup({
                 id: id,
-                firstname: newUserWithoutId.firstname,
-                lastname: newUserWithoutId.lastname,
+                username: newUserWithoutId.username,
                 email: newUserWithoutId.email,
                 password: passworHashed
             })
