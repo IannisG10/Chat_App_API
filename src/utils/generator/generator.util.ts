@@ -10,7 +10,7 @@ export const generateOTP = () => {
 }
 
 // génerer un token
-export const generateToken = (User: Omit<IUser,"firstname" | "lastname">,JWT_KEY: string): string => {
+export const generateToken = (User: Omit<IUser, "username">,JWT_KEY: string): string => {
     const token: string =  jwt.sign(
         User,
         JWT_KEY,

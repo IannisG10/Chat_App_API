@@ -1,17 +1,18 @@
 import { Document, Schema, model } from "mongoose";
 
+
+//User: Document MongoDB (schema)
 interface User extends Document {
     id: string;
-    firstname: string;
-    lastname: string;
+    username: string;
     email: string;
     password: string;
 }
 
+// Type native
 export interface IUser {
     id: string;
-    firstname: string;
-    lastname: string;
+    username: string;
     email: string;
     password: string;
 }
@@ -27,11 +28,7 @@ const userSchema = new Schema<User>({
         required: true,
         unique: true
     },
-    firstname: {
-        type: String,
-        required: true,
-    },
-    lastname: {
+    username: {
         type: String,
         required: true
     },
