@@ -1,7 +1,7 @@
 {
   "name": "learn",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/server.js",
   "scripts": {
     "dev": "nodemon ./src/server.ts",
     "build": "tsc",
