@@ -39,9 +39,8 @@ Remplace `<PORT>` par le port sur lequel dans le `.env`.
   
         ```json
             {
-                "firstname": "John",
-                "lastname": "Doe",
-                "email": "john.doe@example.com",
+                "username": "GUERRA",
+                "email": "guerraiannis@gmail.com",
                 "password": "securepassword"
             }
         ```
@@ -81,7 +80,7 @@ Remplace `<PORT>` par le port sur lequel dans le `.env`.
   
         ```json
             {
-                "email": "john.doe@example.com",
+                "email": "guerraiannis@gmail.com",
                 "password": "securepassword"
             }
 
