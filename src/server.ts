@@ -17,9 +17,9 @@ const router = express.Router()
 
 // Middleware
 app.use(cors({
-    origin: process.env.DOMAIN_ORIGIN ,
+    origin: true,
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    // methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: [ 'Content-type','Authorization' ]  
 }));
 app.use(express.json());
