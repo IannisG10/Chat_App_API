@@ -68,6 +68,7 @@ export const UserRoutePost = (router: Router, service: userPostService) => {
             res.cookie("token_chat",response.token,{
                 httpOnly: true,
                 sameSite: true,
+                secure: true,
                 maxAge: 24 * (60 * (60 * 1000)) // 24h
             })
 
