@@ -6,9 +6,11 @@ import { logUserResponse } from "../../type"
 export const UserRoutePost = (router: Router, service: userPostService) => {
 
     router.post('/signup', async (req: Request, res: Response) => {
+        // Get the data from the request  
         const {  username, email, password } = req.body
 
         try {
+            // test if all the datas are filled
             if ( !username || !email || !password){
                 res.status(StatusCodes.BAD_REQUEST).send({
                     "status": ReasonPhrases.BAD_REQUEST,
@@ -81,7 +83,7 @@ export const UserRoutePost = (router: Router, service: userPostService) => {
         }
     })
 
-    router.post('/auth', async (req: Request, res: Response) => {
+    router.get('/auth', async (req: Request, res: Response) => {
 
         try {
             const token = req.cookies.token_chat;
