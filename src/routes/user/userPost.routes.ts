@@ -86,7 +86,7 @@ export const UserRoutePost = (router: Router, service: userPostService) => {
 
         try {
             const token = req.cookies.token_chat;
-
+            console.log("token reçu :",token);
             const isVerified = await service.Auth(token)
 
             if (!isVerified) {
