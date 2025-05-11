@@ -64,7 +64,6 @@ export const UserRoutePost = (router: Router, service: userPostService) => {
                 })
                 return
             }
-
             // res.cookie("token_chat",response.token,{
             //     httpOnly: true,
             //     sameSite: true,
@@ -88,6 +87,7 @@ export const UserRoutePost = (router: Router, service: userPostService) => {
 
     router.get('/auth', async (req: Request, res: Response) =>{
         try {
+
             // const token = req.cookies.token_chat;
             const auth_token = req.headers['authorization']
             //    const isVerified = await service.Auth(token)
