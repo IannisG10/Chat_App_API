@@ -45,7 +45,7 @@ export const UserRoutePost = (router: Router, service: userPostService) => {
         }
     })
 
-    router.post('/login', async (req: Request, res: Response): Promise<any> => {
+    router.post('/login', async (req: Request, res: Response) => {
         const { email, password } = req.body
 
         try {
@@ -75,30 +75,40 @@ export const UserRoutePost = (router: Router, service: userPostService) => {
             res.status(StatusCodes.OK).send({
                 "status": ReasonPhrases.OK,
                 "message": {
-                    "id": response.id
+                    "id": response.id,
+                    "token": response.token
                 }
             })
 
-            return res.json(response.token)
         } catch (error) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR)
             throw error
         }
     })
 
-    router.get('/auth', async (req: Request, res: Response) => {
-
+    router.get('/auth', async (req: Request, res: Response) =>{
         try {
-            const token = req.cookies.token_chat;
-
-            const isVerified = await service.Auth(token)
-
-            if (!isVerified) {
+            // const token = req.cookies.token_chat;
+            const auth_token = req.headers['authorization']
+            //    const isVerified = await service.Auth(token)
+            if (!auth_token) {
                 res.status(StatusCodes.NOT_FOUND).send({
                     "status": ReasonPhrases.NOT_FOUND,
-                    "message": "log or signup first"
+                    "message": "token missing"
                 })
                 return;
+            }
+            const token = auth_token.split(' ')[1]
+            if(!token){
+                res.status(401).json({
+                    message: 'Token invalide'
+                })
+            }
+            const isVerified = await service.Auth(token)
+            if (!isVerified) {
+                res.status(StatusCodes.UNAUTHORIZED).json({
+                    message: 'Token invalide ou expiré'
+                })
             }
 
             res.status(StatusCodes.OK).send({
