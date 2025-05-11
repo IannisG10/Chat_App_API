@@ -45,7 +45,7 @@ export const UserRoutePost = (router: Router, service: userPostService) => {
         }
     })
 
-    router.post('/login', async (req: Request, res: Response) => {
+    router.post('/login', async (req: Request, res: Response): Promise<any> => {
         const { email, password } = req.body
 
         try {
@@ -65,12 +65,12 @@ export const UserRoutePost = (router: Router, service: userPostService) => {
                 return
             }
 
-            res.cookie("token_chat",response.token,{
-                httpOnly: true,
-                sameSite: true,
-                secure: true,
-                maxAge: 24 * (60 * (60 * 1000)) // 24h
-            })
+            // res.cookie("token_chat",response.token,{
+            //     httpOnly: true,
+            //     sameSite: true,
+            //     secure: true,
+            //     maxAge: 24 * (60 * (60 * 1000)) // 24h
+            // })
 
             res.status(StatusCodes.OK).send({
                 "status": ReasonPhrases.OK,
@@ -78,6 +78,8 @@ export const UserRoutePost = (router: Router, service: userPostService) => {
                     "id": response.id
                 }
             })
+
+            return res.json(response.token)
         } catch (error) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR)
             throw error
